@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+if [ ! -f "Makefile" ]; then
+  cd build
+
+  case "$(uname -a)" in
+    Darwin*)  machine="darwin" ;; 
+    Linux*)   machine="linux" ;;
+    Bsd*)     machine="bsd" ;;
+    Msys*)    machine="windows" ;;
+    Cygwin*)  machine="also windows" ;;
+    *)        machine="unknown" ;;
+  esac
+
+  if [ ${machine} == "linux" ]; then
+    ./premake5 gmake
+  elif [ ${machine} == "darwin" ]; then
+    ./premake5.osx gmake
+  elif [ ${machine} == "windows" ]; then
+    ./premake5.exe gmake
+  elif [ ${machine} == "also windows" ]; then
+    ./premake5.exe gmake
+  else
+    echo "Cannot find machine type"
+    exit
+  fi
+  cd ..
+fi
+
+make all
+eval "./bin/Debug/$(basename "$PWD")"
