@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ ! -f "Makefile" ]; then
+premake () {
   cd build
 
   case "$(uname -a)" in
@@ -25,7 +25,11 @@ if [ ! -f "Makefile" ]; then
     exit
   fi
   cd ..
+}
+
+if [ ! -f "Makefile" ]; then
+  premake
 fi
 
-make all
+make all || (premake && make all)
 eval "./bin/Debug/$(basename "$PWD")"
