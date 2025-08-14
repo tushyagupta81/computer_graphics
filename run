@@ -31,5 +31,5 @@ if [ ! -f "Makefile" ]; then
   premake
 fi
 
-make all || (premake && make all)
+make all || (make clean && premake && make all)
 eval "./bin/Debug/$(basename "$PWD")"

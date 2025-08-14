@@ -1,8 +1,7 @@
 #include "apps.h"
 
 int main() {
-  bar_graph();
-  concentric_circles();
+  LDA();
 
   return 0;
 }

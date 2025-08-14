@@ -4,5 +4,6 @@
 int shapes();
 int concentric_circles();
 int bar_graph();
+int LDA();
 
 #endif // !APPS_H
