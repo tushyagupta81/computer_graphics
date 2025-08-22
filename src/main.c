@@ -1,7 +1,7 @@
 #include "apps.h"
 
 int main() {
-  LDA();
+  midpointEllipse();
 
   return 0;
 }

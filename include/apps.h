@@ -5,5 +5,7 @@ int shapes();
 int concentric_circles();
 int bar_graph();
 int LDA();
+int midpointCircle();
+int midpointEllipse();
 
 #endif // !APPS_H
