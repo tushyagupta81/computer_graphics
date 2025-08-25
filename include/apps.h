@@ -7,5 +7,6 @@ int bar_graph();
 int LDA();
 int midpointCircle();
 int midpointEllipse();
+int rect();
 
 #endif // !APPS_H
