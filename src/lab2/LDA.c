@@ -4,7 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void incDDA(Vector2 init, Vector2 final) {
+bool print = false;
+
+void incDDA(Vector2 init, Vector2 final, Color color) {
   int dy = final.y - init.y;
   int dx = final.x - init.x;
   float m = (float)dy / dx;
@@ -15,25 +17,44 @@ void incDDA(Vector2 init, Vector2 final) {
   step = fmax(abs(dy), abs(dx));
   xinc = dx / step;
   yinc = dy / step;
+  if (print) {
+    printf("xinc=%f yinc=%f\n", xinc, yinc);
+    printf("dx=%d dy=%d\n", dx, dy);
+    printf("init.x=%f init.y=%f\n", init.x, init.y);
+    printf("final.x=%f final.y=%f\n", final.x, final.y);
+  }
   for (int i = 0; i <= step; i++) {
-    DrawPixel(round(x), round(y), WHITE);
-    y = (y + yinc);
-    x = (x + xinc);
+    DrawPixel(round(x), round(y), color);
+    y += yinc;
+    x += xinc;
   }
 }
 
-void bresenhamLDA(Vector2 init, Vector2 final) {
+void bresenhamLDA(Vector2 init, Vector2 final, Color color) {
   int dy = final.y - init.y;
   int dx = final.x - init.x;
-  int sx = dx <= 0 ? -1 : 1;
-  int sy = dy <= 0 ? -1 : 1;
-  int p = 2 * dy - dx;
+  int sx = dx < 0 ? -1 : 1;
+  int sy = dy < 0 ? -1 : 1;
   float m = (float)dy / dx;
+  dx = abs(dx);
+  dy = abs(dy);
+  int p;
+  if (dx >= dy) {
+    p = 2 * dy - dx;
+  } else {
+    p = 2 * dx - dy;
+  }
 
+  if (print) {
+    printf("m=%f\n", m);
+    printf("dx=%d dy=%d\n", dx, dy);
+    printf("init.x=%f init.y=%f\n", init.x, init.y);
+    printf("final.x=%f final.y=%f\n", final.x, final.y);
+  }
   int x = init.x, y = init.y;
   if (m < 1 && m > -1) {
-    for (int i = 0; i < abs(dx); i++) {
-      DrawPixel(x, y, WHITE);
+    for (int i = 0; i < dx; i++) {
+      DrawPixel(x, y, color);
       if (p < 0) {
         x += sx;
         p += 2 * dy;
@@ -44,8 +65,8 @@ void bresenhamLDA(Vector2 init, Vector2 final) {
       }
     }
   } else {
-    for (int i = 0; i < abs(dy); i++) {
-      DrawPixel(x, y, WHITE);
+    for (int i = 0; i < dy; i++) {
+      DrawPixel(x, y, color);
       if (p < 0) {
         y += sy;
         p += 2 * dx;
@@ -58,10 +79,11 @@ void bresenhamLDA(Vector2 init, Vector2 final) {
   }
 }
 
-void draw(Vector2 initial_point, Vector2 final_point) {
-  incDDA(initial_point, final_point);
+void draw(Vector2 initial_point, Vector2 final_point, Color color) {
+  incDDA(initial_point, final_point, color);
+  bresenhamLDA(initial_point, final_point, color);
 
-  // bresenhamLDA(initial_point, final_point);
+  DrawCircleV(final_point, 2, color);
 }
 
 int LDA() {
@@ -80,32 +102,44 @@ int LDA() {
     ClearBackground(BLACK);
 
     Vector2 initial_point = {
-        .x = 10,
-        .y = 300,
+        .x = 20,
+        .y = 20,
     };
     Vector2 final_point = {
-        .x = 100,
-        .y = 200,
+        .x = 220,
+        .y = 220,
     };
-    draw(initial_point, final_point);
+    draw(initial_point, final_point, WHITE);
 
-    initial_point.x = 200;
+    initial_point.x = 220;
+    initial_point.y = 20;
+    final_point.x = 20;
+    final_point.y = 220;
+    draw(initial_point, final_point, BLUE);
+
+    initial_point.x = 500;
     initial_point.y = 10;
     final_point.x = 300;
-    initial_point.y = 200;
-    draw(initial_point, final_point);
+    final_point.y = 10;
+    draw(initial_point, final_point, BLUE);
 
-    initial_point.x = 300;
-    initial_point.y = 150;
-    final_point.x = 200;
-    initial_point.y = 100;
-    draw(initial_point, final_point);
+    initial_point.x = 500;
+    initial_point.y = 10;
+    final_point.x = 500;
+    final_point.y = 210;
+    draw(initial_point, final_point, BLUE);
 
-    initial_point.x = 200;
-    initial_point.y = 100;
-    final_point.x = 100;
-    initial_point.y = 100;
-    draw(initial_point, final_point);
+    initial_point.x = 450;
+    initial_point.y = 450;
+    final_point.x = 250;
+    final_point.y = 250;
+    draw(initial_point, final_point, YELLOW);
+
+    initial_point.x = 450;
+    initial_point.y = 250;
+    final_point.x = 250;
+    final_point.y = 450;
+    draw(initial_point, final_point, PURPLE);
 
     EndDrawing();
   }
