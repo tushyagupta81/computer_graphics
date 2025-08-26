@@ -32,7 +32,7 @@ void bresenhamLDA(Vector2 init, Vector2 final) {
 
   int x = init.x, y = init.y;
   if (m < 1 && m > -1) {
-    for (int i = 0; i < dx; i++) {
+    for (int i = 0; i < abs(dx); i++) {
       DrawPixel(x, y, WHITE);
       if (p < 0) {
         x += sx;
@@ -44,7 +44,7 @@ void bresenhamLDA(Vector2 init, Vector2 final) {
       }
     }
   } else {
-    for (int i = 0; i < dy; i++) {
+    for (int i = 0; i < abs(dy); i++) {
       DrawPixel(x, y, WHITE);
       if (p < 0) {
         y += sy;
@@ -60,16 +60,8 @@ void bresenhamLDA(Vector2 init, Vector2 final) {
 
 void draw(Vector2 initial_point, Vector2 final_point) {
   incDDA(initial_point, final_point);
-  DrawPixelV(initial_point, YELLOW);
-  DrawPixelV(final_point, YELLOW);
-  DrawText("incDDA", (final_point.x - 75), final_point.y, 12, WHITE);
 
-  initial_point.x += 100;
-  final_point.x += 100;
-  bresenhamLDA(initial_point, final_point);
-  DrawPixelV(initial_point, YELLOW);
-  DrawPixelV(final_point, YELLOW);
-  DrawText("bresenhamLDA", (final_point.x - 75), final_point.y, 12, WHITE);
+  // bresenhamLDA(initial_point, final_point);
 }
 
 int LDA() {
@@ -95,6 +87,24 @@ int LDA() {
         .x = 100,
         .y = 200,
     };
+    draw(initial_point, final_point);
+
+    initial_point.x = 200;
+    initial_point.y = 10;
+    final_point.x = 300;
+    initial_point.y = 200;
+    draw(initial_point, final_point);
+
+    initial_point.x = 300;
+    initial_point.y = 150;
+    final_point.x = 200;
+    initial_point.y = 100;
+    draw(initial_point, final_point);
+
+    initial_point.x = 200;
+    initial_point.y = 100;
+    final_point.x = 100;
+    initial_point.y = 100;
     draw(initial_point, final_point);
 
     EndDrawing();
