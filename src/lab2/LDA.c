@@ -81,7 +81,7 @@ void bresenhamLDA(Vector2 init, Vector2 final, Color color) {
 
 void draw(Vector2 initial_point, Vector2 final_point, Color color) {
   incDDA(initial_point, final_point, color);
-  bresenhamLDA(initial_point, final_point, color);
+  // bresenhamLDA(initial_point, final_point, color);
 
   DrawCircleV(final_point, 2, color);
 }
@@ -99,7 +99,7 @@ int LDA() {
     BeginDrawing();
 
     // Setup the back buffer for drawing (clear color and depth buffers)
-    ClearBackground(BLACK);
+    ClearBackground(WHITE);
 
     Vector2 initial_point = {
         .x = 20,
@@ -109,13 +109,13 @@ int LDA() {
         .x = 220,
         .y = 220,
     };
-    draw(initial_point, final_point, WHITE);
+    draw(initial_point, final_point, BLACK);
 
     initial_point.x = 220;
     initial_point.y = 20;
     final_point.x = 20;
     final_point.y = 220;
-    draw(initial_point, final_point, BLUE);
+    draw(initial_point, final_point, RED);
 
     initial_point.x = 500;
     initial_point.y = 10;
@@ -133,13 +133,16 @@ int LDA() {
     initial_point.y = 450;
     final_point.x = 250;
     final_point.y = 250;
-    draw(initial_point, final_point, YELLOW);
+    draw(initial_point, final_point, BLACK);
 
     initial_point.x = 450;
     initial_point.y = 250;
     final_point.x = 250;
     final_point.y = 450;
-    draw(initial_point, final_point, PURPLE);
+    draw(initial_point, final_point, RED);
+
+    // DrawText("Bresenham", 20, 400, 16, BLACK);
+    DrawText("DDA", 20, 400, 16, BLACK);
 
     EndDrawing();
   }
