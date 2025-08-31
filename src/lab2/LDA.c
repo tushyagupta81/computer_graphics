@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-bool print = false;
+bool print = true;
 
 void incDDA(Vector2 init, Vector2 final, Color color) {
   int dy = final.y - init.y;
@@ -24,10 +24,14 @@ void incDDA(Vector2 init, Vector2 final, Color color) {
     printf("final.x=%f final.y=%f\n", final.x, final.y);
   }
   for (int i = 0; i <= step; i++) {
+    if (print) {
+      printf("x = %f, y = %f\n", x, y);
+    }
     DrawPixel(round(x), round(y), color);
     y += yinc;
     x += xinc;
   }
+  print = false;
 }
 
 void bresenhamLDA(Vector2 init, Vector2 final, Color color) {
@@ -53,7 +57,10 @@ void bresenhamLDA(Vector2 init, Vector2 final, Color color) {
   }
   int x = init.x, y = init.y;
   if (m < 1 && m > -1) {
-    for (int i = 0; i < dx; i++) {
+    for (int i = 0; i <= dx; i++) {
+      if (print) {
+        printf("x = %d, y = %d\n", x, y);
+      }
       DrawPixel(x, y, color);
       if (p < 0) {
         x += sx;
@@ -65,7 +72,10 @@ void bresenhamLDA(Vector2 init, Vector2 final, Color color) {
       }
     }
   } else {
-    for (int i = 0; i < dy; i++) {
+    for (int i = 0; i <= dy; i++) {
+      if (print) {
+        printf("x = %d, y = %d\n", x, y);
+      }
       DrawPixel(x, y, color);
       if (p < 0) {
         y += sy;
@@ -77,11 +87,12 @@ void bresenhamLDA(Vector2 init, Vector2 final, Color color) {
       }
     }
   }
+  print = false;
 }
 
 void draw(Vector2 initial_point, Vector2 final_point, Color color) {
-  incDDA(initial_point, final_point, color);
-  // bresenhamLDA(initial_point, final_point, color);
+  // incDDA(initial_point, final_point, color);
+  bresenhamLDA(initial_point, final_point, color);
 
   DrawCircleV(final_point, 2, color);
 }
