@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-bool print = true;
+bool print_lda = true;
 
 void incDDA(Vector2 init, Vector2 final, Color color) {
   int dy = final.y - init.y;
@@ -17,21 +17,21 @@ void incDDA(Vector2 init, Vector2 final, Color color) {
   step = fmax(abs(dy), abs(dx));
   xinc = dx / step;
   yinc = dy / step;
-  if (print) {
+  if (print_lda) {
     printf("xinc=%f yinc=%f\n", xinc, yinc);
     printf("dx=%d dy=%d\n", dx, dy);
     printf("init.x=%f init.y=%f\n", init.x, init.y);
     printf("final.x=%f final.y=%f\n", final.x, final.y);
   }
   for (int i = 0; i <= step; i++) {
-    if (print) {
-      printf("x = %f, y = %f\n", x, y);
+    if (print_lda) {
+      printf("k = %d, x = %f, y = %f\n", i, x, y);
     }
     DrawPixel(round(x), round(y), color);
     y += yinc;
     x += xinc;
   }
-  print = false;
+  // print = false;
 }
 
 void bresenhamLDA(Vector2 init, Vector2 final, Color color) {
@@ -49,17 +49,18 @@ void bresenhamLDA(Vector2 init, Vector2 final, Color color) {
     p = 2 * dx - dy;
   }
 
-  if (print) {
+  if (print_lda) {
     printf("m=%f\n", m);
     printf("dx=%d dy=%d\n", dx, dy);
+    printf("p0=%d\n", p);
     printf("init.x=%f init.y=%f\n", init.x, init.y);
     printf("final.x=%f final.y=%f\n", final.x, final.y);
   }
   int x = init.x, y = init.y;
   if (m < 1 && m > -1) {
     for (int i = 0; i <= dx; i++) {
-      if (print) {
-        printf("x = %d, y = %d\n", x, y);
+      if (print_lda) {
+        printf("k = %d, x = %d, y = %d, p = %d\n", i, x, y, p);
       }
       DrawPixel(x, y, color);
       if (p < 0) {
@@ -73,8 +74,8 @@ void bresenhamLDA(Vector2 init, Vector2 final, Color color) {
     }
   } else {
     for (int i = 0; i <= dy; i++) {
-      if (print) {
-        printf("x = %d, y = %d\n", x, y);
+      if (print_lda) {
+        printf("k = %d, x = %d, y = %d, p = %d\n", i, x, y, p);
       }
       DrawPixel(x, y, color);
       if (p < 0) {
@@ -87,14 +88,18 @@ void bresenhamLDA(Vector2 init, Vector2 final, Color color) {
       }
     }
   }
-  print = false;
+  // print = false;
 }
 
 void draw(Vector2 initial_point, Vector2 final_point, Color color) {
-  // incDDA(initial_point, final_point, color);
-  bresenhamLDA(initial_point, final_point, color);
+  incDDA(initial_point, final_point, color);
+  // bresenhamLDA(initial_point, final_point, color);
 
   DrawCircleV(final_point, 2, color);
+  DrawText(TextFormat("m = %.2f", (final_point.y - initial_point.y) /
+                                      (final_point.x - initial_point.x)),
+           (final_point.x + initial_point.x) / 2,
+           (final_point.y + initial_point.y) / 2, 16, color);
 }
 
 int LDA() {
@@ -118,42 +123,85 @@ int LDA() {
     };
     Vector2 final_point = {
         .x = 220,
-        .y = 220,
+        .y = 180,
     };
+    if (print_lda) {
+      printf("=== Line 1 ===\n");
+    }
     draw(initial_point, final_point, BLACK);
+    DrawText(TextFormat("(%.0f, %.0f)", initial_point.x, initial_point.y),
+             initial_point.x+10, initial_point.y, 16, BLACK);
+    DrawText(TextFormat("(%.0f, %.0f)", final_point.x, final_point.y),
+             final_point.x+10, final_point.y, 16, BLACK);
 
-    initial_point.x = 220;
+    initial_point.x = 520;
     initial_point.y = 20;
-    final_point.x = 20;
-    final_point.y = 220;
-    draw(initial_point, final_point, RED);
+    final_point.x = 320;
+    final_point.y = 180;
+    if (print_lda) {
+      printf("=== Line 2 ===\n");
+    }
+    draw(initial_point, final_point, BLACK);
+    DrawText(TextFormat("(%.0f, %.0f)", initial_point.x, initial_point.y),
+             initial_point.x+10, initial_point.y, 16, BLACK);
+    DrawText(TextFormat("(%.0f, %.0f)", final_point.x, final_point.y),
+             final_point.x+10, final_point.y, 16, BLACK);
 
-    initial_point.x = 500;
+    initial_point.x = 850;
     initial_point.y = 10;
-    final_point.x = 300;
+    final_point.x = 650;
     final_point.y = 10;
-    draw(initial_point, final_point, BLUE);
+    if (print_lda) {
+      printf("=== Line 3 ===\n");
+    }
+    draw(initial_point, final_point, BLACK);
+    DrawText(TextFormat("(%.0f, %.0f)", initial_point.x, initial_point.y),
+             initial_point.x-20, initial_point.y+10, 16, BLACK);
+    DrawText(TextFormat("(%.0f, %.0f)", final_point.x, final_point.y),
+             final_point.x-20, final_point.y+10, 16, BLACK);
 
-    initial_point.x = 500;
+    initial_point.x = 900;
     initial_point.y = 10;
-    final_point.x = 500;
+    final_point.x = 900;
     final_point.y = 210;
-    draw(initial_point, final_point, BLUE);
+    if (print_lda) {
+      printf("=== Line 4 ===\n");
+    }
+    draw(initial_point, final_point, BLACK);
+    DrawText(TextFormat("(%.0f, %.0f)", initial_point.x, initial_point.y),
+             initial_point.x+10, initial_point.y, 16, BLACK);
+    DrawText(TextFormat("(%.0f, %.0f)", final_point.x, final_point.y),
+             final_point.x+10, final_point.y, 16, BLACK);
 
     initial_point.x = 450;
     initial_point.y = 450;
     final_point.x = 250;
-    final_point.y = 250;
+    final_point.y = 290;
+    if (print_lda) {
+      printf("=== Line 5 ===\n");
+    }
     draw(initial_point, final_point, BLACK);
+    DrawText(TextFormat("(%.0f, %.0f)", initial_point.x, initial_point.y),
+             initial_point.x+10, initial_point.y, 16, BLACK);
+    DrawText(TextFormat("(%.0f, %.0f)", final_point.x, final_point.y),
+             final_point.x+10, final_point.y, 16, BLACK);
 
-    initial_point.x = 450;
-    initial_point.y = 250;
-    final_point.x = 250;
-    final_point.y = 450;
-    draw(initial_point, final_point, RED);
+    initial_point.x = 550;
+    initial_point.y = 450;
+    final_point.x = 750;
+    final_point.y = 290;
+    if (print_lda) {
+      printf("=== Line 6 ===\n");
+    }
+    draw(initial_point, final_point, BLACK);
+    DrawText(TextFormat("(%.0f, %.0f)", initial_point.x, initial_point.y),
+             initial_point.x+10, initial_point.y, 16, BLACK);
+    DrawText(TextFormat("(%.0f, %.0f)", final_point.x, final_point.y),
+             final_point.x+10, final_point.y, 16, BLACK);
 
     // DrawText("Bresenham", 20, 400, 16, BLACK);
     DrawText("DDA", 20, 400, 16, BLACK);
+    print_lda = false;
 
     EndDrawing();
   }
