@@ -1,7 +1,7 @@
 #include "apps.h"
 
 int main() {
-  midpointCircle();
+  transformations();
 
   return 0;
 }
