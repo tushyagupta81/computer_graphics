@@ -27,9 +27,9 @@ vector<vector<float>> translate(float sx, float sy) {
 vector<vector<float>> reflect(string wrt) {
   vector<vector<float>> mat = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
   if (wrt == "x") {
-    mat = {{-1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
-  } else if (wrt == "y") {
     mat = {{1, 0, 0}, {0, -1, 0}, {0, 0, 1}};
+  } else if (wrt == "y") {
+    mat = {{-1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
   } else if (wrt == "xy") {
     mat = {{-1, 0, 0}, {0, -1, 0}, {0, 0, 1}};
   } else if (wrt == "x=y") {
@@ -92,7 +92,9 @@ int transformations() {
     // Setup the back buffer for drawing (clear color and depth buffers)
     ClearBackground(BLACK);
 
+    DrawText("Regular", 95, 25, 12, WHITE);
     drawPoints(points);
+    DrawText("Shear-X", 295, 25, 12, WHITE);
     drawPoints(
       mul(
         points,
@@ -108,6 +110,7 @@ int transformations() {
         )
       )
     );
+    DrawText("Shear-Y", 560, 25, 12, WHITE);
     drawPoints(
       mul(
         points,
@@ -123,6 +126,7 @@ int transformations() {
         )
       )
     );
+    DrawText("Rotation", 120, 250, 12, WHITE);
     drawPoints(
       mul(
         points,
@@ -138,21 +142,7 @@ int transformations() {
         )
       )
     );
-    // drawPoints(
-    //   mul(
-    //     points,
-    //     mul(
-    //       mul(
-    //         translate(-((float)200+40)/2, -((float)200+40)/2),
-    //         mul(
-    //           rotatation(30),
-    //           translate(((float)200+40)/2, ((float)200+40)/2)
-    //         )
-    //       ),
-    //       translate(250, 250)
-    //     )
-    //   )
-    // );
+    DrawText("Scaling", 745, 300, 12, WHITE);
     drawPoints(
       mul(
         points,
@@ -168,12 +158,13 @@ int transformations() {
         )
       )
     );
+    DrawText("Reflect along X", 75, 525, 12, WHITE);
     drawPoints(
       mul(
         points,
         mul(
           translate(0, -700),
-          reflect("y")
+          reflect("x")
         )
       )
     );
@@ -183,6 +174,7 @@ int transformations() {
           translate(450, 250)
       )
     );
+    DrawText("Reflect along X=Y", 500, 450, 16, WHITE);
     DrawLine(300, 300, 600, 600, WHITE);
     drawPoints(
       mul(

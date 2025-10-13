@@ -1,6 +1,6 @@
 #include "apps.h"
 #include "raylib.h"
-#include <stdint.h>
+#include <cstdio>
 void draw_points(int x, int y, Vector2 m) {
   DrawPixelV((Vector2){.x = x + m.x, .y = y + m.y}, WHITE);
   DrawPixelV((Vector2){.x = -x + m.x, .y = y + m.y}, WHITE);
@@ -8,12 +8,17 @@ void draw_points(int x, int y, Vector2 m) {
   DrawPixelV((Vector2){.x = x + m.x, .y = -y + m.y}, WHITE);
 }
 
+bool print = true;
+
 void calc_ellipse(Vector2 origin, int rx, int ry) {
   int x = 0, y = ry;
   float p1i = ry * ry - rx * rx * ry + (float)rx * rx / 4;
   int dx = 2 * ry * ry * x;
   int dy = 2 * rx * rx * y;
   while (dx < dy) {
+    if (print) {
+      printf("x = %d, y = %d\n", x, y);
+    }
     draw_points(x, y, origin);
     if (p1i < 0) {
       x += 1;
@@ -31,6 +36,9 @@ void calc_ellipse(Vector2 origin, int rx, int ry) {
   p2i = ry * ry * ((float)x + (float)1 / 2) * ((float)x + (float)1 / 2) +
         rx * rx * (y - 1) * (y - 1) - rx * rx * ry * ry;
   while (dx >= dy && y >= 0) {
+    if (print) {
+      printf("x = %d, y = %d\n", x, y);
+    }
     draw_points(x, y, origin);
     if (p2i > 0) {
       y -= 1;
@@ -44,6 +52,7 @@ void calc_ellipse(Vector2 origin, int rx, int ry) {
       p2i = p2i + dx - dy + rx * rx;
     }
   }
+  print = false;
 }
 
 int midpointEllipse() {
@@ -60,7 +69,12 @@ int midpointEllipse() {
 
     // Setup the back buffer for drawing (clear color and depth buffers)
     ClearBackground(BLACK);
-    calc_ellipse((Vector2){.x = 500, .y = 200}, 100, 50);
+    calc_ellipse((Vector2){.x = 500, .y = 200}, 200, 120);
+    DrawLine(500, 200, 300, 200, WHITE);
+    DrawLine(500, 200, 500, 80, WHITE);
+    DrawText("(500, 200)", 480, 210, 12, WHITE);
+    DrawText("ry=120", 505, 150, 12, WHITE);
+    DrawText("rx=200", 380, 205, 12, WHITE);
 
     EndDrawing();
   }

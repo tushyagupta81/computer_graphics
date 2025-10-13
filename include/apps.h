@@ -9,5 +9,6 @@ int midpointCircle();
 int midpointEllipse();
 int rect();
 int transformations();
+int compo_transformations();
 
 #endif // !APPS_H
