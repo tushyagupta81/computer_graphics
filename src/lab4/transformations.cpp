@@ -68,7 +68,7 @@ void drawRect(vector<vector<float>> &points, vector<float> p, vector<float> q) {
 
 void drawPoints(vector<vector<float>> points) {
   for (auto p : points) {
-    DrawPixel(p[0], p[1], WHITE);
+    DrawPixel(p[0], p[1], BLACK);
   }
 }
 
@@ -90,11 +90,11 @@ int transformations() {
     BeginDrawing();
 
     // Setup the back buffer for drawing (clear color and depth buffers)
-    ClearBackground(BLACK);
+    ClearBackground(WHITE);
 
-    DrawText("Regular", 95, 25, 12, WHITE);
+    DrawText("Regular", 95, 25, 12, BLACK);
     drawPoints(points);
-    DrawText("Shear-X", 295, 25, 12, WHITE);
+    DrawText("Shear-X", 295, 25, 12, BLACK);
     drawPoints(
       mul(
         points,
@@ -110,7 +110,7 @@ int transformations() {
         )
       )
     );
-    DrawText("Shear-Y", 560, 25, 12, WHITE);
+    DrawText("Shear-Y", 560, 25, 12, BLACK);
     drawPoints(
       mul(
         points,
@@ -126,7 +126,7 @@ int transformations() {
         )
       )
     );
-    DrawText("Rotation", 120, 250, 12, WHITE);
+    DrawText("Rotation 30°", 115, 250, 12, BLACK);
     drawPoints(
       mul(
         points,
@@ -142,7 +142,7 @@ int transformations() {
         )
       )
     );
-    DrawText("Scaling", 745, 300, 12, WHITE);
+    DrawText("Scaling", 745, 300, 12, BLACK);
     drawPoints(
       mul(
         points,
@@ -158,7 +158,7 @@ int transformations() {
         )
       )
     );
-    DrawText("Reflect along X", 75, 525, 12, WHITE);
+    DrawText("Reflect along X", 75, 525, 12, BLACK);
     drawPoints(
       mul(
         points,
@@ -174,8 +174,8 @@ int transformations() {
           translate(450, 250)
       )
     );
-    DrawText("Reflect along X=Y", 500, 450, 16, WHITE);
-    DrawLine(300, 300, 600, 600, WHITE);
+    DrawText("Reflect along X=Y", 500, 450, 16, BLACK);
+    DrawLine(300, 300, 600, 600, BLACK);
     drawPoints(
       mul(
         points,

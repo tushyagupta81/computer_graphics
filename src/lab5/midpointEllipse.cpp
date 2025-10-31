@@ -2,10 +2,10 @@
 #include "raylib.h"
 #include <cstdio>
 void draw_points(int x, int y, Vector2 m) {
-  DrawPixelV((Vector2){.x = x + m.x, .y = y + m.y}, WHITE);
-  DrawPixelV((Vector2){.x = -x + m.x, .y = y + m.y}, WHITE);
-  DrawPixelV((Vector2){.x = -x + m.x, .y = -y + m.y}, WHITE);
-  DrawPixelV((Vector2){.x = x + m.x, .y = -y + m.y}, WHITE);
+  DrawPixelV((Vector2){.x = x + m.x, .y = y + m.y}, BLACK);
+  DrawPixelV((Vector2){.x = -x + m.x, .y = y + m.y}, BLACK);
+  DrawPixelV((Vector2){.x = -x + m.x, .y = -y + m.y}, BLACK);
+  DrawPixelV((Vector2){.x = x + m.x, .y = -y + m.y}, BLACK);
 }
 
 bool print = true;
@@ -68,13 +68,13 @@ int midpointEllipse() {
     BeginDrawing();
 
     // Setup the back buffer for drawing (clear color and depth buffers)
-    ClearBackground(BLACK);
+    ClearBackground(WHITE);
     calc_ellipse((Vector2){.x = 500, .y = 200}, 200, 120);
-    DrawLine(500, 200, 300, 200, WHITE);
-    DrawLine(500, 200, 500, 80, WHITE);
-    DrawText("(500, 200)", 480, 210, 12, WHITE);
-    DrawText("ry=120", 505, 150, 12, WHITE);
-    DrawText("rx=200", 380, 205, 12, WHITE);
+    DrawLine(500, 200, 300, 200, BLACK);
+    DrawLine(500, 200, 500, 80, BLACK);
+    DrawText("(500, 200)", 480, 210, 12, BLACK);
+    DrawText("ry=120", 505, 150, 12, BLACK);
+    DrawText("rx=200", 380, 205, 12, BLACK);
 
     EndDrawing();
   }

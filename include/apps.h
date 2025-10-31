@@ -10,5 +10,6 @@ int midpointEllipse();
 int rect();
 int transformations();
 int compo_transformations();
+int cohen_sutherland();
 
 #endif // !APPS_H

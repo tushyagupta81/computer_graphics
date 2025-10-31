@@ -109,7 +109,7 @@ static void drawTri(vector<vector<float>> &points) {
 
 static void drawPoints(vector<vector<float>> points) {
   for (auto p : points) {
-    DrawPixel(p[0], p[1], WHITE);
+    DrawPixel(p[0], p[1], BLACK);
   }
 }
 
@@ -129,11 +129,11 @@ int compo_transformations() {
     BeginDrawing();
 
     // Setup the back buffer for drawing (clear color and depth buffers)
-    ClearBackground(BLACK);
+    ClearBackground(WHITE);
 
-    DrawText("Regular", 50, 40, 12, WHITE);
+    DrawText("Regular", 50, 40, 12, BLACK);
     drawPoints(points);
-    DrawText("Rotation", 180, 50, 12, WHITE);
+    DrawText("Rotation", 180, 50, 12, BLACK);
     drawPoints(
       mul(
         points,
@@ -146,7 +146,7 @@ int compo_transformations() {
         )
       )
     );
-    DrawText("Shearing", 300, 40, 12, WHITE);
+    DrawText("Shearing", 300, 40, 12, BLACK);
     drawPoints(
       mul(
         points,
@@ -159,7 +159,7 @@ int compo_transformations() {
         )
       )
     );
-    DrawText("Reflection", 40, 205, 12, WHITE);
+    DrawText("Reflection", 40, 205, 12, BLACK);
     drawPoints(
       mul(
         points,
@@ -172,7 +172,7 @@ int compo_transformations() {
         )
       )
     );
-    DrawText("Reflection", 170, 210, 12, WHITE);
+    DrawText("Scaling", 180, 210, 12, BLACK);
     drawPoints(
       mul(
         points,

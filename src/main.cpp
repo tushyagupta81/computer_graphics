@@ -1,7 +1,7 @@
 #include "apps.h"
 
 int main() {
-  midpointEllipse();
+  cohen_sutherland();
 
   return 0;
 }
