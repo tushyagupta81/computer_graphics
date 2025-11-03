@@ -1,7 +1,7 @@
 #include "apps.h"
 
 int main() {
-  cohen_sutherland();
+  point_clipping();
 
   return 0;
 }

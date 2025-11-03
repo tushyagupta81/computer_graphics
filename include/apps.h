@@ -11,5 +11,8 @@ int rect();
 int transformations();
 int compo_transformations();
 int cohen_sutherland();
+int boundary_fill();
+int flood_fill();
+int point_clipping();
 
 #endif // !APPS_H
