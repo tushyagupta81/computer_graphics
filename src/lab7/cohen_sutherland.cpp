@@ -100,26 +100,31 @@ int cohen_sutherland() {
 
     Vector2 bottomright = {.x = 400, .y = 100};
     Vector2 topleft = {.x = 100, .y = 300};
-    DrawCircleV(topleft, 2, BLACK);
-    DrawCircleV(bottomright, 2, BLACK);
+    // DrawCircleV(topleft, 2, BLACK);
+    // DrawCircleV(bottomright, 2, BLACK);
 
-    Vector2 p = {.x = 50, .y = 200};
-    Vector2 q = {.x = 200, .y = 50};
+    Vector2 p = {.x = 45, .y = 200};
+    Vector2 q = {.x = 200, .y = 55};
     DrawLineV(p, q, BLACK);
     cohen(p, q, topleft, bottomright);
 
-    p = {.x = 50, .y = 200};
-    q = {.x = 200, .y = 200};
+    p = {.x = 75, .y = 200};
+    q = {.x = 225, .y = 200};
     DrawLineV(p, q, BLACK);
     cohen(p, q, topleft, bottomright);
 
-    p = {.x = 200, .y = 50};
-    q = {.x = 200, .y = 200};
+    p = {.x = 250, .y = 50};
+    q = {.x = 250, .y = 200};
     DrawLineV(p, q, BLACK);
     cohen(p, q, topleft, bottomright);
 
-    p = {.x = 50, .y = 50};
-    q = {.x = 200, .y = 50};
+    p = {.x = 50, .y = 320};
+    q = {.x = 200, .y = 320};
+    DrawLineV(p, q, BLACK);
+    cohen(p, q, topleft, bottomright);
+
+    p = {.x = 50, .y = 275};
+    q = {.x = 200, .y = 275};
     DrawLineV(p, q, BLACK);
     cohen(p, q, topleft, bottomright);
 

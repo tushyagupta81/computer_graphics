@@ -11,6 +11,7 @@ int rect();
 int transformations();
 int compo_transformations();
 int cohen_sutherland();
+int liang_barsky();
 int boundary_fill();
 int flood_fill();
 int point_clipping();

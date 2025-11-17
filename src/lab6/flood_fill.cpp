@@ -46,7 +46,7 @@ int flood_fill() {
   // Create the window and OpenGL context
   InitWindow(1280, 800, "flood_fill");
 
-  Color FILL_COLOR = GREEN, OLD_COLOR = WHITE;
+  Color FILL_COLOR = BLACK, OLD_COLOR = WHITE;
 
   Image img = GenImageColor(1280, 800, WHITE);
   ImageDrawRectangleLines(

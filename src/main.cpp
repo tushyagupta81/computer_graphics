@@ -1,7 +1,8 @@
 #include "apps.h"
 
 int main() {
-  point_clipping();
+  cohen_sutherland();
+  liang_barsky();
 
   return 0;
 }

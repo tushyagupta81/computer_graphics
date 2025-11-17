@@ -2,12 +2,9 @@
 #include "raylib.h"
 
 void draw_point(Vector2 p, int wxman, int wxmin, int wymax, int wymin) {
-  if (p.x > wxman || p.x < wxmin) {
+  if (p.y > wymax || p.y < wymin || p.x > wxman || p.x < wxmin) {
     DrawCircleV(p, 2, RED);
-    return;
-  }
-  if (p.y > wymax || p.y < wymin) {
-    DrawCircleV(p, 2, RED);
+    DrawText("Rejected", p.x+5, p.y-20, 16, BLACK);
     return;
   }
   DrawCircleV(p, 2, BLACK);
