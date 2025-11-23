@@ -15,5 +15,6 @@ int liang_barsky();
 int boundary_fill();
 int flood_fill();
 int point_clipping();
+int polygon_clipping();
 
 #endif // !APPS_H

@@ -1,8 +1,7 @@
 #include "apps.h"
 
 int main() {
-  cohen_sutherland();
-  liang_barsky();
+  polygon_clipping();
 
   return 0;
 }
