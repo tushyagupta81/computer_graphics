@@ -16,5 +16,6 @@ int boundary_fill();
 int flood_fill();
 int point_clipping();
 int polygon_clipping();
+int final();
 
 #endif // !APPS_H
